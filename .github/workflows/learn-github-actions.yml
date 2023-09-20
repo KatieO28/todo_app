@@ -2,12 +2,18 @@ name: test-automation-pipeline
 run-name: ${{ github.actor }} is learning GitHub Actions
 on: [push]
 jobs:
-  hello-testbash:
+  say-hello:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Hello Testbash"
+  unit-tests:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v3
         with:
           node-version: '18'
-      - run: echo "Hello TestBash"
+      - run: cd ./src/webapp/api && npm ci && npm run test
+
+
 
